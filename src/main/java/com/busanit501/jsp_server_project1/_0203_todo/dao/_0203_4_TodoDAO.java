@@ -117,5 +117,48 @@ public class _0203_4_TodoDAO {
         return list;
     }
 
+    // 한개만 조회, 특징, 조회할 tno 번호를 알고 있다고 가정.
+    // 조회할 todo 를 클릭을 하면, 클릭한 todo tno 번호를 화면으로 부터 전달을 받음.
+    public _0203_1_TodoVO selectOne(Long tno) throws Exception {
+        // sql 문장 작성,
+        String sql = "select * from tbl_todo where tno = ?";
+
+        // 디비 서버에 연결하는 도구 설정.(반복)
+        @Cleanup Connection connection = _0203_3_ConnectionUtil.INSTANCE.getConnection();
+
+        // sql 문장을 담아 두는 기능(반복)
+        @Cleanup PreparedStatement preparedStatement = connection.prepareStatement(sql);
+
+        // 와일드 카드 값을 추가. tno = ?
+        preparedStatement.setLong(1,tno);
+
+        // sql 문장을 디비 서버에 전달.  and 결과 테이블을 받아와서, 담아두기.
+        @Cleanup ResultSet resultSet = preparedStatement.executeQuery();
+
+        // 데이터베이스로 받아온 내용을, 하나 객체로 변환 하는 작업.
+
+
+        // 반복문을 이용해서, 데이터베이스 내용 -> 리스트의 요소의 객체에 각각 담기 놀이.
+        // resultSet, 테이블, 준비는 0행부터 준비를하고, next() 실행하면, 데이터가 있으면 다음행으로 갑니다.
+        // 예시) 데이터베이스의 현재 데이터의 테이블
+        // 0행은 없죠?
+//        예시 -> tno = 4
+        //  tno,title,dueDate,finished
+//     1행   4,샘플제목22,2026-02-03,0
+
+        resultSet.next();
+            // 객체에 담기 위해서, 임시 객체를 생성, builder 패턴이용함.
+            _0203_1_TodoVO vo = _0203_1_TodoVO.builder()
+                    .tno(resultSet.getLong("tno"))
+                    .title(resultSet.getString("title"))
+                    // 타입을 일치 시켜주기,
+                    .dueDate(resultSet.getDate("dueDate").toLocalDate())
+                    .finished(resultSet.getBoolean("finished"))
+                    .build();
+
+
+        return vo;
+    }
+
 
 } //_0203_4_TodoDAO 닫기
