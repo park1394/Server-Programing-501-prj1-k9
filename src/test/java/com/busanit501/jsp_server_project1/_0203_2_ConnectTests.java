@@ -11,7 +11,7 @@ public class _0203_2_ConnectTests {
         // HikariConfig 클래스 이용해서, 옵션 설정.
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("org.mariadb.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mysql://localhost:3306/webdb");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
         config.setUsername("webuser");
         config.setPassword("webuser");
 
