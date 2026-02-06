@@ -39,6 +39,14 @@ public class _0206_13_LoginController extends HttpServlet {
 
         // 세션을 이용해서, 저장하기.
         session.setAttribute("loginInfo",mid_mpw );
+
+        // 세션을 이용해서, 불로오기
+        Object loginInfo = session.getAttribute("loginInfo");
+        String loginInfoStr = (String) loginInfo;
+
+        // 저장 후, 바로 불러오기 출력 확인.
+        log.info("세션에 저장된 loginInfo 불러와 확인 loginInfoStr :  " + loginInfoStr);
+
         resp.sendRedirect("/todo/list_0206");
     }
 }
