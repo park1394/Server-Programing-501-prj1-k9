@@ -54,9 +54,10 @@ public class _0209_14_LoginCheckFilter implements Filter {
         // 임시 로그인 처리라서,
         // JSESSIONID 있어요, 해당 서버에 완전 최초 접속자는 아니예요.
         // 세션이라는 공간에 loginInfo 라는 이름으로 저장을 할예정, 로그인한 유저를 .
-        if(session.getAttribute("loginInfo") == null) {
+        if(session.getAttribute("loginInfo") != null) {
             log.info("로그인 정보가 없는 사용자입니다.");
-            resp.sendRedirect("/login_0209");
+//            resp.sendRedirect("/login_0209");
+            filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
 
