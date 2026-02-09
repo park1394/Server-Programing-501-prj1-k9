@@ -6,10 +6,7 @@ import lombok.extern.log4j.Log4j2;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.UUID;
 
@@ -41,24 +38,35 @@ public class _0209_13_LoginController extends HttpServlet {
         String auto = req.getParameter("auto");
         // 자동로그인 체크 여부의 상태 변수.
         boolean rememberMe = auto != null && auto.equals("on");
-        if (rememberMe) {
-            //임시로 UUID 클래스를 이용해서, 랜덤한 문자열 생성.
-            String uuid = UUID.randomUUID().toString();
-        }
-        //===================================================================
-
-        // 데이터베이스 로직처리로 변경, 이전 코드는 0206를 참고하기.
         try {
-            // 화면에 입력한 mid,mpw 내용이 데이터베이스 있다면, 정상 로그인 처리.
-            // 없다면 예외를 발생시켜셔 로그인 페이지로 보내고, 보내는데,
-            // 쿼리 스트링으로 result=error 같이 전달.
+            //
             _0209_18_MemberDTO memberDTO = memberService.login(mid, mpw);
+            if (rememberMe) {
+                //임시로 UUID 클래스를 이용해서, 랜덤한 문자열 생성.
+                String uuid = UUID.randomUUID().toString();
+                log.info("생성된 uuid 값 확인: " + uuid);
+                // 서비스의 도움의 받아서, DB 에 해당 유저의 uuid 컬럼 부분을 업데이트 하기.
+                memberService.updateUuid(mid,uuid);
+                // 멤버 테이블에 업데이트가 된 uuid를 현재 로그인한 유저 상태에도 똑같이 업데이트
+                memberDTO.setUuid(uuid);
+
+                //쿠키 전달.  서버 : 쿠키 생성, 서버가 웹브라우저에게 쿠키를 전달함.
+                Cookie rememberCookie = new Cookie("remember-me", uuid);
+                // 유효기간 : 7일
+                rememberCookie.setMaxAge(60 * 60 * 24 * 7);
+                rememberCookie.setPath("/");
+                // 서버가 전달하기.
+                resp.addCookie(rememberCookie);
+
+            }
+            // 세션에 기록하기.
             HttpSession session = req.getSession();
             session.setAttribute("loginInfo", memberDTO);
             resp.sendRedirect("/todo/list_0209");
-
         } catch (Exception e) {
-            resp.sendRedirect("/login?result=error");
+           resp.sendRedirect("/login_0209?result=error");
         }
+
+        //===================================================================
     } //doPost
 }

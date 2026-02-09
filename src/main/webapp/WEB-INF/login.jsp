@@ -19,7 +19,8 @@
 <form action="/login_0209" method="post">
     <input type="text" name="mid">
     <input type="text" name="mpw">
-    <input type="checkbox" name="auto">
+    <input type="checkbox" name="auto">자동로그인
+    <br>
     <button type="submit">로그인</button>
 </form>
 
