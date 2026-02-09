@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>임시 로그인 화면 </h1>
-<form action="/login" method="post">
+<form action="/login_0209" method="post">
     <input type="text" name="mid">
     <input type="text" name="mpw">
     <button type="submit">로그인</button>
