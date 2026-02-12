@@ -13,4 +13,32 @@
     <!--    <bean class="com.busanit501.jsp_server_project1.springex_0212.sample._2_SampleService_0212"></bean>-->
 
     <context:component-scan base-package="com.busanit501.jsp_server_project1.springex_0212.sample"/>
+
+<!--    데이터베이스 관련 설정 , 매번 타이핑 하는게 아니다. 설정 파일은 복사를 한다. 꼭 기억하기.-->
+<!--    변경하는 부분은, 옵션 부분, 계정, 비번, 포트 번호, 데이터베이스, 옵션 값(피씨 사양에 따라 달라서, 기본값.)-->
+    <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
+        <!--        속성 옵션 설정해서, 작업.-->
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"></property>
+        <property name="jdbcUrl" value="jdbc:mariadb://localhost:3306/webdb"></property>
+        <property name="username" value="webuser"></property>
+        <property name="password" value="webuser"></property>
+        <property name="dataSourceProperties">
+            <props>
+                <prop key="cachePrepStmts">true</prop>
+                <prop key="prepStmtCacheSize">250</prop>
+                <prop key="prepStmtCacheSqlLimit">2048</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--    위에서 설정한 hikariConfig 설정을 , dataSource 인스턴스에 포함하기.-->
+    <!--&lt;!&ndash;    생성자 주입으로 포함하기&ndash;&gt;-->
+    <!--    public class DataSource {-->
+    <!--        private HikariConfig hikariConfig-->
+    <!--    }-->
+    <bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+          destroy-method="close">
+        <constructor-arg ref="hikariConfig"/>
+    </bean>
+
 </beans>
