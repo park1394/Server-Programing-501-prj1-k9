@@ -1,0 +1,6 @@
+package com.busanit501.jsp_server_project1.springex_0213.mapper;
+
+public interface TimeMapper2 {
+
+    String getTime();
+}
