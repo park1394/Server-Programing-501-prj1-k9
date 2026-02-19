@@ -27,6 +27,8 @@ public class CommonExceptionAdvice {
     // 해결책2
     // 제가 의도치 않은 상황이 발생. 그래서, 이 예외처리를 딱 지정해서 못하는 경우.
     // 범위를 넓혀서, 일반적으로 처리. Exception , 좀더 범위가 큰 클래스를 이용.
+    @ResponseBody
+    @ExceptionHandler(Exception.class)
     public  String exceptCommon(Exception exception) {
         log.error("===============어떤 예외가 발생할지 모르니, 범위가 큰 예외로 처리함. 예외처리 테스트=======================");
         log.error(exception.getMessage());
