@@ -13,8 +13,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
+<%--    5.0 버전--%>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<%--    5.3버전--%>
+<%--    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">--%>
 
     <title>임시 register</title>
 </head>
@@ -62,23 +66,32 @@
                     </div>
                     <div class="card-body">
                         <form action="/todo2/register" method="post">
-<%--                            부트스트랩 이용중이고, 폼 컨트롤 하나씩 적용해보기.--%>
+                            <%--                            부트스트랩 이용중이고, 폼 컨트롤 하나씩 적용해보기.--%>
                             <div class="input-group mb-3">
                                 <span class="input-group-text">Title:</span>
                                 <input class="form-control" type="text" name="title" placeholder="todo 제목을 입력해주세요">
                             </div>
-                            <div>
-                                DueDate: <input type="date" name="dueDate">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text">DueDate: </span>
+                                <input class="form-control" type="date" name="dueDate">
                             </div>
-                            <div>
-                                Writer: <input type="text" name="writer">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"> Writer:  </span>
+                                <input class="form-control" type="text" name="writer">
                             </div>
-                            <div>
-                                Finished: <input type="checkbox" name="finished">
+                            <div class="form-check form-check-reverse mb-3">
+                                <span class="form-check-label">  Finished:  </span>
+                                <input class="form-check-input" type="checkbox" name="finished">
                             </div>
+<%--                            <div class="form-check mb-3">--%>
+<%--                                <input class="form-check-input" type="checkbox" value="" id="checkDefault">--%>
+<%--                                <label class="form-check-label" for="checkDefault">--%>
+<%--                                    Default checkbox--%>
+<%--                                </label>--%>
+<%--                            </div>--%>
                             <div>
-                                <button type="reset">초기화</button>
-                                <button type="submit">등록하기</button>
+                                <button class="btn btn-secondary" type="reset">초기화</button>
+                                <button class="btn btn-primary" type="submit">등록하기</button>
                             </div>
                         </form>
                     </div>
@@ -105,9 +118,13 @@
 </div>
 <h1>부트스트랩 적용, register 화면</h1>
 
-
+<%--5.0 버전--%>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
+
+<%--5.3 버전 --%>
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>--%>
+</body>
 </body>
 </html>
