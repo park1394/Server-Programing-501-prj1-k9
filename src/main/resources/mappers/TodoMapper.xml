@@ -8,4 +8,6 @@
     <select id="getTime" resultType="string">
         select now()
     </select>
+<!--    여러 개의 sql 문장을 여기에 등록할 예정-->
+
 </mapper>
