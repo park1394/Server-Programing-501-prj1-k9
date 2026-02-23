@@ -91,10 +91,10 @@
                                 <span class="form-check-label">  Finished:  </span>
                                 <input class="form-check-input" type="checkbox" name="finished">
                             </div>
-                            <div class="custom-check-inline">
-                                <label for="myCheck2">완료 여부: </label>
-                                <input type="checkbox" id="myCheck2" name="finished">
-                            </div>
+<%--                            <div class="custom-check-inline">--%>
+<%--                                <label for="myCheck2">완료 여부: </label>--%>
+<%--                                <input type="checkbox" id="myCheck2" name="finished">--%>
+<%--                            </div>--%>
                             <%--                            <div class="form-check mb-3">--%>
                             <%--                                <input class="form-check-input" type="checkbox" value="" id="checkDefault">--%>
                             <%--                                <label class="form-check-label" for="checkDefault">--%>

@@ -57,8 +57,11 @@ public class TodoController {
     public String postRegister(@Valid TodoDTO todoDTO, BindingResult bindingResult,
                                RedirectAttributes redirectAttributes) {
         log.info("todo2 register..post");
-
-
+        log.info("todoDTO : " + todoDTO);
+        boolean finishedBoolean = todoDTO.isFinished();
+        if (finishedBoolean){
+        todoDTO.setFinished(finishedBoolean);
+        }
         // 유효성 체크
         if(bindingResult.hasErrors()) {
             log.info("유효성 오류가 있습니다. ");
