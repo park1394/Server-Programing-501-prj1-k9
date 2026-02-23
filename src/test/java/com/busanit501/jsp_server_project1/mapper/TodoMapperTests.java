@@ -44,6 +44,13 @@ public class TodoMapperTests {
     public void testSelectAll() {
         List<TodoVO> voList = todoMapper.selectAll();
         voList.forEach(vo -> log.info(vo));
-
     }
+
+    @Test
+    public void testSelectOne() {
+        // 각자 데이터베이스에 있는 tno 번호 확인 후 , 테스트 진행하기.
+      TodoVO todoVO = todoMapper.selectOne(32L);
+      log.info(todoVO);
+    }
+
 }
