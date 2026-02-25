@@ -132,6 +132,8 @@ public class TodoController {
     @PostMapping("/modify")
     // 유효성 체크시, 주의사항, !) @Valid TodoDTO todoDTO, BindingResult bindingResult, 순서 주의!!!
     public String postModify(@Valid TodoDTO todoDTO, BindingResult bindingResult,
+     // 수정 화면에서, 수정시 -> 히든으로 숨겨둔 페이지, 사이즈 정보를 , page, size 전달을 하면,
+                             PageRequestDTO pageRequestDTO,
                                RedirectAttributes redirectAttributes) {
         log.info("todo2 register..post");
 
@@ -144,6 +146,8 @@ public class TodoController {
             // 서버에서 화면으로 임시 데이터를 전달. 박스이름: errors, 박스 내용물: 오류가 난 이유.
             redirectAttributes.addFlashAttribute("errors",bindingResult.getAllErrors());
             redirectAttributes.addAttribute("tno", todoDTO.getTno());
+            redirectAttributes.addAttribute("page",pageRequestDTO.getPage()); // 현재 보고 있는 페이지로 이동.
+            redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
             return "redirect:/todo2/modify";
         }
 
@@ -152,8 +156,9 @@ public class TodoController {
         todoService.modify(todoDTO);
 
         log.info(" 유효성 통과한 데이터 todoDTO 2: " + todoDTO);
+        // 서버에서 -> 화면으로 데이터를 전달시, 쿼리 스트링으로 전달하는 방법.
+        redirectAttributes.addAttribute("page",pageRequestDTO.getPage()); // 현재 보고 있는 페이지로 이동.
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
         return "redirect:/todo2/list";
     }
-
-
 }
