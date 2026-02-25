@@ -107,7 +107,7 @@ public class TodoMapperTests {
                 .page(1)
                 .size(10)
                 .types(new String[]{"t","w"})
-                .keyword("테스트")
+                .keyword("점심")
                 .finished(true)
                 .from(LocalDate.of(2026,02,01))
                 .to(LocalDate.of(2026,02,28))
@@ -115,5 +115,8 @@ public class TodoMapperTests {
 
         List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
         voList.forEach(vo -> log.info(vo));
+
+        // 전체 갯수
+        log.info(todoMapper.getCount(pageRequestDTO));
     }
 }
