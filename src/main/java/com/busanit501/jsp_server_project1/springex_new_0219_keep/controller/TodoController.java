@@ -67,7 +67,10 @@ public class TodoController {
     // 재사용,
     // modify.jsp 화면만 추가하면됨. (read.jsp, modify.jsp 화면이 거의 비슷함), 재사용.
     @GetMapping({"/read", "/modify"})
-    public void read(Long tno, Model model) {
+//    public void read(Long tno, Model model) {
+    //  스프링에서는 기본적으로 매개변수의 클래스 타입을 화면으로 전달함: PageRequestDTO pageRequestDTO
+    // 서버 -> 화면으로, 해당 데이터 전달 : pageRequestDTO
+    public void read(Long tno, PageRequestDTO pageRequestDTO, Model model) {
         log.info("todo2 read...");
         TodoDTO todoDTO = todoService.getOne(tno);
         // 서버 -> 화면에 데이터 목록들을 전달. 박스 이름 : dto, 내용물: DB에서 받아온 목록들

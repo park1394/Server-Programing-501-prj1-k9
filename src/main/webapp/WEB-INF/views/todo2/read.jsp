@@ -90,7 +90,7 @@
                         <script>
                             //목록가기
                             document.querySelector(".btn-secondary").addEventListener("click", function (e) {
-                                self.location = "/todo2/list"
+                                self.location = "/todo2/list?${pageRequestDTO.link}"
                                 },false
                             )
                             //수정폼 가기.
