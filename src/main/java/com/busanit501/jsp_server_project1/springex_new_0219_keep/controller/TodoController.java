@@ -78,12 +78,18 @@ public class TodoController {
     }
 
     @PostMapping("/delete")
-    public String delete(Long tno, RedirectAttributes redirectAttributes) {
+    // 수정 화면에서, 삭제시 -> 히든으로 숨겨둔 페이지, 사이즈 정보를 , page, size 전달을 하면,
+    // PageRequestDTO 자동으로 데이터를 맵핑을 함.
+    public String delete(Long tno, PageRequestDTO pageRequestDTO, RedirectAttributes redirectAttributes) {
         log.info("삭제 포스트 처리 작업 ");
         log.info("삭제할 tno 번호 확인 : " + tno);
 
         // 실제 삭제 기능은 아직 미구현,
         todoService.remove(tno);
+
+        // 서버에서 -> 화면으로 데이터를 전달시, 쿼리 스트링으로 전달하는 방법.
+        redirectAttributes.addAttribute("page",1);
+        redirectAttributes.addAttribute("size",pageRequestDTO.getSize());
 
         return "redirect:/todo2/list";
     }
