@@ -85,11 +85,14 @@
                             </tbody>
                         </table>
                         <div class="float-end">
-                            <ul class="pagination">
+                            <ul class="pagination flex-wrap">
                                 <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <c:forEach begin="${responseDTO.start}" end="${responseDTO.end}" var="num">
+                                    <li class="page-item"><a class="page-link" href="#">${num}</a></li>
+                                </c:forEach>
+<%--                                <li class="page-item"><a class="page-link" href="#">1</a></li>--%>
+<%--                                <li class="page-item"><a class="page-link" href="#">2</a></li>--%>
+<%--                                <li class="page-item"><a class="page-link" href="#">3</a></li>--%>
                                 <li class="page-item"><a class="page-link" href="#">Next</a></li>
                             </ul>
                         </div>
