@@ -73,7 +73,7 @@
                                 <tr>
                                     <th><c:out value="${dto.tno}"/></th>
                                     <td>
-                                        <a href="/todo2/read?tno=${dto.tno}" class="text-decoration-none">
+                                        <a href="/todo2/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none">
                                             <c:out value="${dto.title}"/>
                                         </a>
                                     </td>

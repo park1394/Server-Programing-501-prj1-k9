@@ -45,6 +45,7 @@ public class TodoController {
     // 화면으로 부터, 보고 있는 페이지 번호를 받는다, page, size 받는다, 낱개로 받기 싫어서, DTO 로 받는다.
     // PageRequestDTO
     @RequestMapping("/list")
+    //  스프링에서는 기본적으로 매개변수의 클래스 타입을 화면으로 전달함: PageRequestDTO pageRequestDTO
     public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult,
                      Model model) {
         log.info("pageRequestDTO : " + pageRequestDTO);
