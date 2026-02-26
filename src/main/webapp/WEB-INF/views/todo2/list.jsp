@@ -59,7 +59,8 @@
                     <div class="card-body">
                         <form action="/todo2/list" method="get">
                             <input type="hidden" name="size" value="${pageRequestDTO.size}">
-                            <input type="hidden" name="page" value="${pageRequestDTO.page}">
+<%--                            계속 기본 page =1 전달이 되어서, 수정--%>
+<%--                            <input type="hidden" name="page" value="${pageRequestDTO.page}">--%>
                             <div class="mb-3">
                                 <input type="checkbox" name="finished"
                                 ${pageRequestDTO.finished ? "checked" : ""}
@@ -183,6 +184,10 @@
                                 // 물론, 페이지, 사이즈 정보도 같이 전달.  히든으로 페이지, 사이즈 전달.
                                 // 폼 방식으로 만 서버에 전달하면, 1) 검색, 필터 준비물 + 2) 페이지 정보, 사이즈 정보 같이 전달.
                                 const formObj = document.querySelector("form")
+
+                                // innerHTML 속성을 이용해서, page 정보를 재전달.
+                                formObj.innerHTML += `<input type='hidden' name='page' value='\${num}'>`
+
                                 formObj.submit()
                             }, false)
                         </script>
