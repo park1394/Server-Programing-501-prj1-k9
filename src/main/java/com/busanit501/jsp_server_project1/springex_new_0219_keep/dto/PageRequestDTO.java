@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Positive;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -40,6 +42,40 @@ public class PageRequestDTO {
             StringBuilder builder = new StringBuilder();
             builder.append("page=" + this.page);
             builder.append("&size=" + this.size);
+
+            // 추가 작업, 검색 정보들도 같이 보내자.
+            // 검색 준비물 5가지 첨부 및 확인
+            if(finished) {
+                builder.append("&finished=on");
+            }
+
+            // types = {"t", "w"}, types = {"t"}, types = {"w"}, types = {}
+            if(types != null && types.length > 0) {
+                for (int i = 0; i < types.length; i++) {
+                    builder.append("&types=" + types[i]);
+                }
+            }
+
+            if(keyword != null){
+                // 한글로 넘어 오는 경우도 있어서, 인코딩을 UTF-8 로 변환.
+                // 뭔가를 변환 작업을 한다면, 의무적으로 예외 처리를 해야함.
+                try {
+                    builder.append("&fkeyword=" + URLEncoder.encode(keyword,"UTF-8"));
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(from != null) {
+                builder.append("&from=" + from.toString());
+            }
+
+            if(to != null) {
+                builder.append("&to=" + to.toString());
+            }
+            // 추가 작업, 검색 정보들도 같이 보내자.
+            // 검색 준비물 5가지 첨부 및 확인
+
             link = builder.toString(); // link = "page=3&size=10"
         }
         return link;
